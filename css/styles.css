@@ -1,0 +1,33 @@
+body {
+  font-family: monospace;
+  font-size: 16px;
+  background: #d9d3d3;
+}
+
+header {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-weight: bold;
+  padding-right: 8px;
+}
+
+#name {
+  border: 1px solid black;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 8px;
+}
