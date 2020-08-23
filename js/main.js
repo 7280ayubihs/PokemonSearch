@@ -36,15 +36,28 @@
       }
     }); 
   });
-
-  // 自動化（json or csv からロードする）
-  const PokemonList = [
-    new Pokemon(1, "フシギダネ", new Type("くさ", "どく")),
-    new Pokemon(4, "ヒトカゲ", new Type("ほのお")),
-    new Pokemon(6, "リザードン", new Type("ほのお", "ひこう")),
-    new Pokemon(7, "ゼニガメ", new Type("みず")),
-    new Pokemon(25, "ピカチュウ", new Type("でんき")),
-    new Pokemon(151, "ミュウツー", new Type("エスパー")),
-    new Pokemon(151, "ミュウ", new Type("エスパー")),
-  ];
+  
+  const PokemonList = [];
+  const request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (request.readyState === 4 && request.status === 200) {
+      const json = JSON.parse(request.responseText);
+      json.forEach(data => {
+        let type;
+        if (0 < data.type2.length) {
+          type = new Type(data.type1, data.type2);
+        } else {
+          type = new Type(data.type1);
+        }
+        PokemonList.push(
+          new Pokemon(
+            parseInt(data.no),
+            data.name,
+            type)
+        );
+      });
+    }
+  }
+  request.open("GET", "json/pokemon.json", false);
+  request.send();
 }

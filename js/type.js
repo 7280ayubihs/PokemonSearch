@@ -76,9 +76,9 @@ class Type {
    */
   setupCompatibility() {
     this.weaknessDouble = [];
-    this.weakness = typeCompatibilityMap[this.typeCode1][0];
-    this.strong = typeCompatibilityMap[this.typeCode1][1];
-    this.invalid = typeCompatibilityMap[this.typeCode1][2];
+    this.weakness = typeCompatibilityMap[this.typeCode1][0].concat();
+    this.strong = typeCompatibilityMap[this.typeCode1][1].concat();
+    this.invalid = typeCompatibilityMap[this.typeCode1][2].concat();
     this.strongDouble = [];
 
     if (this.type2 === undefined) {
