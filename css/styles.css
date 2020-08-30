@@ -10,6 +10,10 @@ header {
   text-align: center;
 }
 
+hr {
+  margin: 16px;
+}
+
 .container {
   display: flex;
   margin-left: 16px;
