@@ -2,11 +2,12 @@
 
 {
   class Pokemon {
-    constructor(no, name, type, ability) {
+    constructor(no, name, type, ability, baseStats) {
       this.no = no;
       this.name = name;
       this.type = type;
       this.ability = ability;
+      this.baseStats = baseStats;
     }
 
     getNoString() {
@@ -17,6 +18,12 @@
   const name = document.getElementById("name");
   const no = document.getElementById("no");
   const type = document.getElementById("type");
+  const hitPoints  = document.getElementById("hitPoints");
+  const attack = document.getElementById("attack");
+  const defense = document.getElementById("defense");
+  const specialAttack = document.getElementById("specialAttack");
+  const specialDefense = document.getElementById("specialDefense");
+  const speed = document.getElementById("speed");
   const ability1 = document.getElementById("ability1");
   const ability2 = document.getElementById("ability2");
   const hiddenAbility = document.getElementById("hiddenAbility");
@@ -29,6 +36,12 @@
   name.addEventListener("keyup", e => {
     no.textContent = "";
     type.textContent = "";
+    hitPoints.textContent = "";
+    attack.textContent = "";
+    defense.textContent = "";
+    specialAttack.textContent = "";
+    specialDefense.textContent = "";
+    speed.textContent = "";
     ability1.textContent = "";
     ability2.textContent = "";
     hiddenAbility.textContent = "";
@@ -42,6 +55,12 @@
       if (name.textContent === pokemon.name) {
         no.textContent = pokemon.getNoString();
         type.textContent = pokemon.type.getTypeString();
+        hitPoints.textContent = pokemon.baseStats.getHitPointsString();
+        attack.textContent = pokemon.baseStats.getAttackString();
+        defense.textContent = pokemon.baseStats.getDefenseString();
+        specialAttack.textContent = pokemon.baseStats.getSpecialAttackString();
+        specialDefense.textContent = pokemon.baseStats.getSpecialDefenseString();
+        speed.textContent = pokemon.baseStats.getSpeedString();
         ability1.textContent = pokemon.ability[0].getAbilityString();
         if (pokemon.ability[1] !== undefined) {
           ability2.textContent = pokemon.ability[1].getAbilityString();
@@ -102,9 +121,21 @@
             }
           });
         }
+
+        // 種族値
+        const baseStats = new BaseStats(
+          data.hitPoints,
+          data.attack,
+          data.defense,
+          data.specialAttack,
+          data.specialDefense,
+          data.speed
+        );
+
+        // ポケモン追加
         PokemonList.push(
           new Pokemon(
-            data.no, data.name, type, abilities)
+            data.no, data.name, type, abilities, baseStats)
         );
       });
     }
